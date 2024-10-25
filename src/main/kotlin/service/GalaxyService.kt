@@ -9,15 +9,33 @@ import java.time.Month
 
 @ApplicationScoped
 class GalaxyService {
+
+    /**
+     * addメソッドを使うので、MutableListを使う
+     */
     private val heroes: MutableList<Hero> = mutableListOf()
     private val films: MutableList<Film> = mutableListOf()
 
     fun allFilms(): List<Film> = films
 
+    /**
+     * このメソッドは、[films]リストから指定されたIDの映画を取得する
+     * 同期処理用のゲッター
+     */
     fun getFilm(id: Int): Film = films[id]
 
     /**
+     * このメソッドは、[films]リストから指定されたIDの映画を取得する
+     * 非同期処理用のゲッター
+     */
+//    fun getFilm(id: Int): Uni<Film> {
+//        return Uni.createFrom().item(films[id])
+//    }
+
+    /**
      * [it]はラムダ式の暗黙の変数で、この場合は[heroes]リストの要素（ここの[Hero]オブジェクト）を指す
+     *
+     * [contains]は、リスト(今回は[episodeIds])が指定された要素を含む場合にtrueを返す
      */
     fun getHeroesByFilm(film: Film): List<Hero> =
         heroes.filter { it.episodeIds.contains(film.episodeID) }
