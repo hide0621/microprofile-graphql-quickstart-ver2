@@ -16,6 +16,9 @@ class GalaxyService {
 
     fun getFilm(id: Int): Film = films[id]
 
+    /**
+     * [it]はラムダ式の暗黙の変数で、この場合は[heroes]リストの要素（ここの[Hero]オブジェクト）を指す
+     */
     fun getHeroesByFilm(film: Film): List<Hero> =
         heroes.filter { it.episodeIds.contains(film.episodeID) }
 
@@ -27,6 +30,10 @@ class GalaxyService {
 
     fun getHeroesBySurname(surname: String): List<Hero> = heroes.filter { it.surname.equals(surname) }
 
+    /**
+     * 以下の初期化処理（オブジェクト生成）のコードは直感に反しておらず分かりやすいため、色んなシーンで使えそう
+     * この初期化をするなら、クラスにプライマリーコンストラクタ（引数なしのデフォルトコンストラクタも含む）もセカンダリーコンストラクタも不要
+     */
     init {
         Film()
             .apply {
